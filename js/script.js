@@ -191,7 +191,7 @@ for(let i = 0; i < ejemplo.length; i++){
     console.log(ejemplo[i]);
 }
 
-// Existe otra manera de trabajar con bucles y objetos
+// Existe otra manera de trabajar con bucles y objetos, con el forEach
 let suma = 0;
 ejemplo.forEach(pepito =>{
     suma = suma + parseFloat(pepito.textContent)
@@ -205,7 +205,7 @@ salida.textContent = media;
 // 2. ¿Cómo podemos acceder a las propiedades y atributos de nuestros objetos y modificarlos?
 
 // Para acceder y modificar contenido de texto de una etiqueta html (objeto) podemos utilizar
-// dos funciones:
+// dos funciones, textConte e innerHTML:
 console.log(titulo.textContent); //Nos devuelve un tipo de dato primitivo. Asi accedemos y visualizamos la propiedad
 titulo.textContent = "Bienvenidos a vuestra a peor pesadilla <br> JAJAJA";
 
@@ -214,11 +214,13 @@ titulo.innerHTML = "Bienvenidos a vuestra a peor pesadilla <br> JAJAJA";
 
 
 // 3. ¿Como creamos eventos?
-
-const btn = document.querySelector("button");
+const btn = document.querySelector("button"); // Seleccionamos el elemento que queremos que active el evento
+// Creamos el evento
 btn.addEventListener("click", function(){
-    const peso = document.querySelector(".peso");
+    // Entrada de información a através de la etiqueta input
+    const peso = document.querySelector(".peso"); 
     const altura = document.querySelector(".altura");
+    // Para acceder al contenido de texto de una etiqueta tipo input utilizamos la funcion value
     const IMC = parseFloat(peso.value)/(parseFloat(altura.value)*parseFloat(altura.value));
     console.log(IMC);
 
