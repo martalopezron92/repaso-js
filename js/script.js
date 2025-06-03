@@ -191,15 +191,12 @@ for(let i = 0; i < ejemplo.length; i++){
     console.log(ejemplo[i]);
 }
 
-// Existe otra manera de trabajar con bucles y objetos, con el forEach
-let suma = 0;
-ejemplo.forEach(pepito =>{
-    suma = suma + parseFloat(pepito.textContent)
-})
 
-const media = suma/ejemplo.length;
-const salida = document.querySelector(".media");
-salida.textContent = media;
+// Existe otra manera de trabajar con bucles y objetos, con el forEach
+ejemplo.forEach((objeto, pos) =>{
+    console.log("Elemento:" + pos);
+    console.log(objeto);
+})
 
 
 // 2. ¿Cómo podemos acceder a las propiedades y atributos de nuestros objetos y modificarlos?
@@ -209,9 +206,30 @@ salida.textContent = media;
 console.log(titulo.textContent); //Nos devuelve un tipo de dato primitivo. Asi accedemos y visualizamos la propiedad
 titulo.textContent = "Bienvenidos a vuestra a peor pesadilla <br> JAJAJA";
 
+const sub = document.querySelector(".subtitulo");
+sub.textContent = "Que pasa <br> chavales";
+
 console.log(titulo.innerHTML); //La diferencia con textContent es que permite intrepretar etiquetas html dentro del texto
 titulo.innerHTML = "Bienvenidos a vuestra a peor pesadilla <br> JAJAJA";
+sub.innerHTML = "Que pasa <br> <br> chavales";
 
+// EJEMPLO USANDO FOREACH y TEXTCONTENT
+let suma = 0;
+ejemplo.forEach(nota =>{
+    suma = suma + parseFloat(nota.textContent);
+})
+
+const media = suma/ejemplo.length;
+const salida = document.querySelector(".media");
+salida.textContent = suma;
+
+let nombres = document.querySelectorAll(".ejemplo2");
+let concatenar = [];
+nombres.forEach(nombre =>{
+    concatenar.push(nombre.textContent);
+})
+const salida_cadena = document.querySelector(".salida-cadena");
+salida_cadena.textContent = concatenar;
 
 // 3. ¿Como creamos eventos?
 const btn = document.querySelector("button"); // Seleccionamos el elemento que queremos que active el evento
@@ -228,6 +246,46 @@ btn.addEventListener("click", function(){
     const salida_IMC = document.querySelector(".IMC");
     salida_IMC.textContent = "Tu imc corporal es de " + IMC; 
 });
+
+const enlace = document.querySelector(".enlace");
+enlace.addEventListener("click", function(){
+    const saludo = document.querySelector(".saludo");
+    saludo.textContent = "HOLA";
+})
+
+const btn_enviar = document.querySelector(".enviar");
+btn_enviar.addEventListener("click", function(){
+    // Cuando accedemos al contenido de etiquetas de tipo input utilizamos el método value. Value es lo mismo que textContent pero solo
+    // tiene sentido y se puede y se debe utilizar con las etiquetas input
+    let edad = document.querySelector(".edad");
+    let anyo_nacimiento = document.querySelector(".nacimiento");
+    const anyos = document.querySelector(".años");
+
+    if(2025 - edad.value != anyo_nacimiento.value){
+        anyos.textContent = "Los datos introducidos no son correctos";
+    }else{
+        anyos.textContent = "Los datos introducidos si son correctos";
+    }
+})
+
+
+// 4. ¿Como podemos acceder y modificar propiedades del estilo css de nuestro objeto?
+// 1. Accediendo directamente a la propiedad del objeto y modificandola, a traves del método style
+const color = document.querySelector(".cambio_color");
+color.addEventListener("click", function(){
+    titulo.style.color = "#e67655";
+    titulo.style.fontSize = "5rem";
+    titulo.style.backgroundColor = "black";
+
+    // sub.classList.add("color", "espacio");
+})
+
+// 2. Creando clases en css y asociandolas a nuestros objetos a través del método classList
+color.addEventListener("click", function(){
+    //sub.classList.add("color", "espacio"); //Añadimos clases creadas PREVIAMENTE en css con las propiedades que queremos modificar
+    //sub.classList.remove("subtitulo"); // Eliminamos una clase ya asociada al objeto
+    sub.classList.toggle("color");
+})
 
 
 
