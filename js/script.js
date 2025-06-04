@@ -228,20 +228,20 @@ const salida_cadena = document.querySelector(".salida-cadena");
 salida_cadena.textContent = concatenar;
 
 // 3. ¿Como creamos eventos?
-const btn = document.querySelector("button"); // Seleccionamos el elemento que queremos que active el evento
+const btn = document.querySelector(".boton_formulario"); // Seleccionamos el elemento que queremos que active el evento
 // Creamos el evento
-btn.addEventListener("click", function(){
-    // Entrada de información a através de la etiqueta input
-    const peso = document.querySelector(".peso"); 
-    const altura = document.querySelector(".altura");
-    // Para acceder al contenido de texto de una etiqueta tipo input utilizamos la funcion value
-    const IMC = parseFloat(peso.value)/(parseFloat(altura.value)*parseFloat(altura.value));
-    console.log(IMC);
+// btn.addEventListener("click", function(){
+//     // Entrada de información a através de la etiqueta input
+//     const peso = document.querySelector(".peso"); 
+//     const altura = document.querySelector(".altura");
+//     // Para acceder al contenido de texto de una etiqueta tipo input utilizamos la funcion value
+//     const IMC = parseFloat(peso.value)/(parseFloat(altura.value)*parseFloat(altura.value));
+//     console.log(IMC);
 
-    // Si queremos que se visualice el resultado en una etiqueta html utilizamos textContent
-    const salida_IMC = document.querySelector(".IMC");
-    salida_IMC.textContent = "Tu imc corporal es de " + IMC; 
-});
+//     // Si queremos que se visualice el resultado en una etiqueta html utilizamos textContent
+//     const salida_IMC = document.querySelector(".IMC");
+//     salida_IMC.textContent = "Tu imc corporal es de " + IMC; 
+// });
 
 
 // 4. ¿Como accedemos y modificamos las propiedades (css) de nuestro elemento seleccionado?
@@ -264,6 +264,8 @@ btn_color.addEventListener("click", function(){
     //subtit.classList.add("color-modificado"); // Esta funcion nos permite añadir clases
     subtit.classList.toggle("color-modificado"); // Esta funcion nos permite alternar clases (es decir, añadir y eliminar en funcion de si existen o no)
 
+
+    // La funcion contains nos devueñve true si el objeto contiene la clase especificada y false si no
     const dosclases = document.querySelector(".numero");
     if(dosclases.classList.contains("ejemplo") == true){
         dosclases.style.color = "red";
@@ -271,25 +273,84 @@ btn_color.addEventListener("click", function(){
 
 })
 
-//subtit = document.querySelector("h2");
-//subtit.classList.remove("subtitulo"); // Esta funcion nos permite eliminar clases
+subtit = document.querySelector("h2");
+subtit.classList.remove("subtitulo"); // Esta funcion nos permite eliminar clases
 
+// El método classList nos permite trabajar con las clases de nuestro objeto como si fueran elementos de un array
 const dosclases = document.querySelector(".numero");
+// Con la funcion .length nos devuelve el numero de clases asociadas
 console.log("El numero de clases de este objeto es: " + dosclases.classList.length);
+// Podemos acceder a las clases por su posicion (como en los arrays)
 console.log(dosclases.classList[0]);
 console.log(dosclases.classList[1]);
+// Recorrerlos con un forEach también
 dosclases.classList.forEach((clase, i) =>{
     console.log("clase " + (i + 1) + ": " + clase);
 })
 
 
 // 5. ¿Como podemos modificar O ACCEDER a atributos de nuestros objetos?
+// La diferencia en propiedad y atributo es muy importante. Llamaremos propiedad a todo lo que podemos
+// modificar desde css y atributo a los parámetros que vienen indicados en la propia etiqueta html
 const nombre = document.querySelector(".nombre");
-let nombre_variable = nombre.getAttribute("placeholder") + " por favor"; //Accedemos y obtenemos el valor del atributo
-nombre.setAttribute("placeholder", "DIME TU NOMBRE"); //Nos sirve para modificar el valor del atributo
+let nombre_variable = nombre.getAttribute("placeholder") + " por favor"; //Con la funcion .getAttribute accedemos y obtenemos el valor del atributo
+nombre.setAttribute("placeholder", "DIME TU NOMBRE"); //La función .setAttribute nos sirve para modificar el valor del atributo
 nombre.style.width = "20rem"; //Modifiicando una propiedad (css)
-nombre.removeAttribute("placeholder"); //Nos sirve para eliminar un atributo
+nombre.removeAttribute("placeholder"); //La funcion .removeAttribbute nos sirve para eliminar un atributo
 console.log(nombre.getAttribute("class"));
+
+
+
+// 6. ¿Como creamos elementos y objetos nuevos en nuestro html de manera dinámica?
+// 1. Utilizamos la funcion createElement para crear el elemento
+// 2. Modificamos su contenido y apariencia utilizando textContent, classList o cualquiera de los métodos que ya conocemos
+// 3. Posicionamos el elemento dentro de nuestro html utilizando la funcion .appendChild. Esta funcion coloca 
+// el nuevo elemento como el ultimo hijo de la etiqueta padre que lo contiene.
+
+btn.addEventListener("click", function(){
+    // Entrada de información a através de la etiqueta input
+    const peso = document.querySelector(".peso"); 
+    const altura = document.querySelector(".altura");
+    // Para acceder al contenido de texto de una etiqueta tipo input utilizamos la funcion value
+    const IMC = parseFloat(peso.value)/(parseFloat(altura.value)*parseFloat(altura.value));
+    console.log("salida:" + IMC);
+
+    // Previamente a crear el nuevo objeto, para que no se vayan creando elementos uno detras de otro,
+    // comprobamos si existe.
+    // Para ello, seleccionamos el objeto a través del selector .nextElementSibling, que nos devuelve el 
+    // objeto hermano (si existiera) del elemento indicado 
+    const formulario = document.querySelector("form"); //El formulario es el elemento hermano en este ejemplo
+    let salida = formulario.nextElementSibling;
+
+    // Si existe, lo eliminamos utilizando la funcion .remove. Si no existe no se hace nada.
+    if(salida){
+        salida.remove();
+    }
+
+    // Creamos el elemento para que nos aparezca siempre una unica vez
+    salida = document.createElement("p"); //Creamos el nuevo elemento
+    salida.innerHTML = "Tu imc corporal es de " + IMC; //Modificamos su contenido
+    // Modificamos sus propiedades css
+    if(IMC < 20){
+        salida.style.color = "red";
+    }
+    else if(IMC >= 20 && IMC < 24){
+        salida.style.color = "green";
+    }else{
+        salida.style.color = "yellow";
+    }
+
+    // Posicionamos el nuevo elemento.
+    // Para añadir como ultimo elemento de una etiqueta padre se utiliza la funcion appendChild
+    const padre = document.querySelector("body");
+    padre.appendChild(salida);
+
+});
+
+
+
+
+
 
 
 
