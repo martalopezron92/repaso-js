@@ -219,15 +219,6 @@ titulo.innerHTML = "Bienvenidos a vuestra a peor pesadilla <br> JAJAJA";
 sub.innerHTML = "Que pasa <br> <br> chavales";
 
 // EJEMPLO USANDO FOREACH y TEXTCONTENT
-let suma = 0;
-ejemplo.forEach(nota =>{
-    suma = suma + parseFloat(nota.textContent);
-})
-
-const media = suma/ejemplo.length;
-const salida = document.querySelector(".media");
-salida.textContent = suma;
-
 let nombres = document.querySelectorAll(".ejemplo2");
 let concatenar = [];
 nombres.forEach(nombre =>{
