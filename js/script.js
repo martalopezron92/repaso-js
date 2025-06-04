@@ -191,6 +191,7 @@ for(let i = 0; i < ejemplo.length; i++){
     console.log(ejemplo[i]);
 }
 
+
 // Existe otra manera de trabajar con bucles y objetos, con el forEach
 let suma = 0;
 ejemplo.forEach((pepito, i) =>{
@@ -210,9 +211,30 @@ salida.textContent = media;
 console.log(titulo.textContent); //Nos devuelve un tipo de dato primitivo. Asi accedemos y visualizamos la propiedad
 titulo.textContent = "Bienvenidos a vuestra a peor pesadilla <br> JAJAJA";
 
+const sub = document.querySelector(".subtitulo");
+sub.textContent = "Que pasa <br> chavales";
+
 console.log(titulo.innerHTML); //La diferencia con textContent es que permite intrepretar etiquetas html dentro del texto
 titulo.innerHTML = "Bienvenidos a vuestra a peor pesadilla <br> JAJAJA";
+sub.innerHTML = "Que pasa <br> <br> chavales";
 
+// EJEMPLO USANDO FOREACH y TEXTCONTENT
+let suma = 0;
+ejemplo.forEach(nota =>{
+    suma = suma + parseFloat(nota.textContent);
+})
+
+const media = suma/ejemplo.length;
+const salida = document.querySelector(".media");
+salida.textContent = suma;
+
+let nombres = document.querySelectorAll(".ejemplo2");
+let concatenar = [];
+nombres.forEach(nombre =>{
+    concatenar.push(nombre.textContent);
+})
+const salida_cadena = document.querySelector(".salida-cadena");
+salida_cadena.textContent = concatenar;
 
 // 3. ¿Como creamos eventos?
 const btn = document.querySelector("button"); // Seleccionamos el elemento que queremos que active el evento
