@@ -193,7 +193,8 @@ for(let i = 0; i < ejemplo.length; i++){
 
 // Existe otra manera de trabajar con bucles y objetos, con el forEach
 let suma = 0;
-ejemplo.forEach(pepito =>{
+ejemplo.forEach((pepito, i) =>{
+    console.log(i + 1);
     suma = suma + parseFloat(pepito.textContent)
 })
 
@@ -228,6 +229,60 @@ btn.addEventListener("click", function(){
     const salida_IMC = document.querySelector(".IMC");
     salida_IMC.textContent = "Tu imc corporal es de " + IMC; 
 });
+
+
+// 4. ¿Como accedemos y modificamos las propiedades (css) de nuestro elemento seleccionado?
+// Ejemplo de cambiar un color de un titulo a traves de un evento
+
+btn_color = document.querySelector(".cambio_color");
+
+btn_color.addEventListener("click", function(){
+    tit = document.querySelector("h1");
+    tit.style.color = "#ed5656"; // Accediendo a la propiedad que queremos modificar, a traves de style
+    tit.style.backgroundColor = "black";
+    tit.style.padding = "5rem";
+    tit.style.fontSize = "15rem";
+})
+
+// ¿Y si queremos volver al color original cuando volvemos a pulsar el boton?
+// Para esto utilizamos el metodo classList. Este metodo necesita de una clase creada previamente en css
+btn_color.addEventListener("click", function(){
+    subtit = document.querySelector("h2");
+    //subtit.classList.add("color-modificado"); // Esta funcion nos permite añadir clases
+    subtit.classList.toggle("color-modificado"); // Esta funcion nos permite alternar clases (es decir, añadir y eliminar en funcion de si existen o no)
+
+    const dosclases = document.querySelector(".numero");
+    if(dosclases.classList.contains("ejemplo") == true){
+        dosclases.style.color = "red";
+    }
+
+})
+
+//subtit = document.querySelector("h2");
+//subtit.classList.remove("subtitulo"); // Esta funcion nos permite eliminar clases
+
+const dosclases = document.querySelector(".numero");
+console.log("El numero de clases de este objeto es: " + dosclases.classList.length);
+console.log(dosclases.classList[0]);
+console.log(dosclases.classList[1]);
+dosclases.classList.forEach((clase, i) =>{
+    console.log("clase " + (i + 1) + ": " + clase);
+})
+
+
+// 5. ¿Como podemos modificar O ACCEDER a atributos de nuestros objetos?
+const nombre = document.querySelector(".nombre");
+let nombre_variable = nombre.getAttribute("placeholder") + " por favor"; //Accedemos y obtenemos el valor del atributo
+nombre.setAttribute("placeholder", "DIME TU NOMBRE"); //Nos sirve para modificar el valor del atributo
+nombre.style.width = "20rem"; //Modifiicando una propiedad (css)
+nombre.removeAttribute("placeholder"); //Nos sirve para eliminar un atributo
+console.log(nombre.getAttribute("class"));
+
+
+
+
+
+
 
 
 
