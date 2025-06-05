@@ -299,6 +299,12 @@ nombre.style.width = "20rem"; //Modifiicando una propiedad (css)
 nombre.removeAttribute("placeholder"); //La funcion .removeAttribbute nos sirve para eliminar un atributo
 console.log(nombre.getAttribute("class"));
 
+const peso = document.querySelector(".peso");
+let text_peso = peso.getAttribute("placeholder"); // Sirve para acceder al valor del atributo indicado, NO para modificarlo
+text_peso = text_peso + " por favor";
+console.log("El valor del placeholder es :" + text_peso);
+peso.setAttribute("placeholder", "Introduce tu peso en kg");
+peso.removeAttribute("placeholder");
 
 
 // 6. ¿Como creamos elementos y objetos nuevos en nuestro html de manera dinámica?
@@ -307,13 +313,14 @@ console.log(nombre.getAttribute("class"));
 // 3. Posicionamos el elemento dentro de nuestro html utilizando la funcion .appendChild. Esta funcion coloca 
 // el nuevo elemento como el ultimo hijo de la etiqueta padre que lo contiene.
 
+// EJEMPLO 1
 btn.addEventListener("click", function(){
     // Entrada de información a através de la etiqueta input
     const peso = document.querySelector(".peso"); 
     const altura = document.querySelector(".altura");
     // Para acceder al contenido de texto de una etiqueta tipo input utilizamos la funcion value
     const IMC = parseFloat(peso.value)/(parseFloat(altura.value)*parseFloat(altura.value));
-    console.log("salida:" + IMC);
+    // console.log("salida:" + IMC);
 
     // Previamente a crear el nuevo objeto, para que no se vayan creando elementos uno detras de otro,
     // comprobamos si existe.
@@ -337,15 +344,65 @@ btn.addEventListener("click", function(){
     else if(IMC >= 20 && IMC < 24){
         salida.style.color = "green";
     }else{
-        salida.style.color = "yellow";
+        salida.style.color = "black";
     }
 
     // Posicionamos el nuevo elemento.
     // Para añadir como ultimo elemento de una etiqueta padre se utiliza la funcion appendChild
-    const padre = document.querySelector("body");
-    padre.appendChild(salida);
+    const elemento_referencia = document.querySelector("form");
+    elemento_referencia.parentNode.insertBefore(salida, elemento_referencia.nextElementSibling);
 
 });
+
+
+// EJEMPLO 2
+
+// 1. CReamos los elementos
+const new_btn = document.createElement("button");
+const new_inp = document.createElement("input");
+
+// 2. Modificamos su contenido y atributos
+new_btn.textContent = "Click aqui";
+new_inp.setAttribute("placeholder", "Introduce tu nombre");
+console.log(new_btn);
+console.log(new_inp);
+
+// 3. Modificamos su apariencia
+new_btn.classList.add("new-btn");
+new_inp.classList.add("new-input");
+
+// 3. Posicionamiento de nuestro nuevo elemento
+// a) appendChild: Posiciona el objeto como el ultimo hijo de la etiqueta padre seleccionada
+
+// Ejemplo 1: Lo posicionamos como los ultimos elementos dentro del body
+const body = document.querySelector("body");
+body.appendChild(new_inp);
+body.appendChild(new_btn);
+
+// Ejemplo 2: Lo posicionamos con los ultimos elementos dentro del form
+// const form = document.querySelector("form");
+// form.appendChild(new_inp);
+// form.appendChild(new_btn);
+
+
+// b) padre.insertBefore(nuevo elemento, elemento de referencia): Posiciona el objeto antes de otro objeto
+//    nextSiblingElement: Selecciona al siguiente hermano adyacente
+//    parentNode: Nos devuelve el elemento padre a partir de uno de sus hijos
+const new_p = document.createElement("p");
+new_p.textContent = 4;
+new_p.style.color = "green";
+
+const p_before = document.querySelector(".numero");
+p_before.parentNode.insertBefore(new_p, p_before.nextElementSibling);
+
+console.log(p_before.parentNode); // Nos devuelve el objeto padre seleccionado
+console.log(p_before.nextElementSibling); // Nos devuelve el objeto hermano adyacente del elemento seleccionado
+
+
+// 7. ¿Como eliminamos elementos de manera dinamica?
+const elemento_eliminar = p_before.nextElementSibling; // Lo seleccionamos como hermano adyacente
+elemento_eliminar.remove();
+
 
 
 

@@ -5,3 +5,21 @@
     border: solid 10px green;
     padding: 5rem;
 }
+
+
+.new-input{
+    margin-top:5rem;
+    margin-right: 2rem;
+    width: 10em;
+    /* height: 3rem; */
+    color: black;
+}
+
+
+.new-btn{
+    margin-top:5rem;
+    width: 7rem;
+    /* height: 3rem; */
+    background-color: black;
+    color: white;
+}
